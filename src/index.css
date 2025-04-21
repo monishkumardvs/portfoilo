@@ -50,6 +50,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  min-height: 100vh; /* Ensure full page coverage */
 }
 
 .hero-gradient-dark::before {
@@ -78,6 +79,8 @@
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   padding: 8px;
   border-radius: 50%;
+  width: 200px; /* Fixed size for consistency */
+  height: 200px;
 }
 
 .profile-image:hover {
@@ -134,7 +137,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #d1d5db; /* Improved visibility */
+  color: #d1d5db;
 }
 
 .nav-link:hover {
@@ -159,7 +162,7 @@
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-  color: #d1d5db; /* Improved visibility */
+  color: #d1d5db;
 }
 
 .project-card::before {
@@ -192,7 +195,7 @@
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.04) 100%);
   border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  color: #d1d5db; /* Improved visibility */
+  color: #d1d5db;
   font-size: 1.1rem;
 }
 
@@ -295,8 +298,37 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: -1;
   opacity: 0.4;
   pointer-events: none;
+}
+
+/* Enhanced Experience Section Styling */
+#experience .grid {
+  grid-template-columns: 1fr; /* Single column for better readability */
+  gap: 20px; /* Increased gap for spacing */
+}
+
+#experience .bg-gray-800\/50 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  backdrop-filter: blur(10px);
+}
+
+#experience h3 {
+  color: #14b8a6; /* Teal shade for consistency */
+  font-size: 1.75rem;
+}
+
+#experience p {
+  color: #a3bffa; /* Softer text color */
+}
+
+#experience ul {
+  padding-left: 20px;
+}
+
+#experience li {
+  color: #d1d5db;
+  margin-bottom: 8px;
 }
