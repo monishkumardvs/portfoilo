@@ -5,7 +5,6 @@ import {
   Github,
   Linkedin,
   Mail,
-  Phone,
   Code2,
   Brain,
   Server,
@@ -15,8 +14,8 @@ import {
   AlignCenterVertical as Certificate,
   Terminal,
   Database,
-  ExternalLink,
 } from 'lucide-react';
+import './index.css';
 
 function App() {
   const [activeSection, setActiveSection] = useState('home');
@@ -54,7 +53,6 @@ function App() {
     threshold: 0.1,
   });
 
-  // Social media button handlers
   const handleGitHubClick = () => {
     window.open('https://github.com/monishkumardvs', '_blank', 'noopener,noreferrer');
   };
@@ -67,8 +65,8 @@ function App() {
     window.location.href = 'mailto:monishkumardvs009@gmail.com';
   };
 
-  const handleCallClick = () => {
-    window.location.href = 'tel:+916303066854';
+  const handleResumeDownload = () => {
+    window.open('/assets/resume1.pdf', '_blank');
   };
 
   const experience = [
@@ -108,35 +106,30 @@ function App() {
       description: 'Designed and developed a full-stack web application to enable collaborative study planning for students. Implemented JWT-based authentication for secure access and integrated real-time group messaging using Socket.io. Enhanced productivity with personalized study insights and deadline notifications, reducing missed deadlines by 20%. Enabled secure file uploads using Multer for seamless sharing of study materials.',
       technologies: ['React', 'NodeJS', 'MongoDB', 'Socket.io', 'JWT', 'Multer'],
       github: 'https://github.com/monishkumardvs/study-planner',
-      
     },
     {
       title: 'AI-Driven Hedge Fund Trading Bot',
       description: 'Designed and developed a real-time AI-powered trading bot for hedge fund strategies, featuring a multi-agent system with sentiment analysis (FinBERT), technical indicators, fundamental analysis, and risk management. Implemented Streamlit-based deployment for live decision-making, integrated Gemini LLM for intelligent synthesis, and created a custom backtesting framework to validate strategies, improving simulated returns by 15%. Enabled secure API data retrieval from Yahoo Finance and Alpaca with environment variable management.',
       technologies: ['Python', 'Streamlit', 'Pandas', 'Hugging Face Transformers (FinBERT)', 'Alpaca API', 'Yahoo Finance API', 'Gemini LLM'],
       github: '',
-      demo: 'https://b9tyuhx5pdymid9dosqppr.streamlit.app/',
     },
     {
       title: 'Farm2Fork – Sustainable Food Supply Chain System',
       description: 'Developed a decentralized supply chain system using Pinata (IPFS) for tamper-proof data storage, ensuring end-to-end transparency. Designed a farmer dashboard for listing crops, fertilizers used, and pricing, and a distributor module for managing orders, negotiations, and storage. Built a retailer module to browse distributors, place orders, and generate a QR code for complete traceability. Integrated sustainability scoring for farmers and distributors to promote eco-friendly practices.',
       technologies: ['React', 'NodeJS', 'MongoDB', 'Pinata(IPFS)', 'Solidity', 'Ethereum'],
       github: 'https://github.com/monishkumardvs/license-plate-recognition',
-    
     },
     {
       title: 'AI-Driven Audio Description Generator for Accessibility',
       description: 'Designed and developed an AI-powered virtual assistant for visually impaired users. Integrated speech recognition, text-to-speech (TTS), and Large Language Models (LLM). Implemented NewsAPI, OpenWeatherMap, and Wikipedia APIs; employed BLIP and DialoGPT for enhanced accessibility and conversational interactions. Developed an adaptive response system that dynamically generates real-time context-aware descriptions based on user queries.',
       technologies: ['Python', 'Transformers', 'NewsAPI', 'OpenWeatherMap', 'Wikipedia API'],
       github: '',
-      
     },
     {
       title: 'AI-Enhanced 3D Puzzle Game with Adaptive Difficulty',
       description: 'Developed an interactive 3D puzzle-solving platform featuring dynamic difficulty adjustment powered by Deep Q-Networks (DQN). Created an immersive experience using Three.js and A-Frame for 3D environments. Integrated gesture and voice-based controls with HandTrack.js and Web Speech API for inclusive gameplay. Built an intelligent AI companion that offers real-time hints and guidance. Backend infrastructure implemented using Node.js, Express.js, and MongoDB for scalable performance.',
       technologies: ['JavaScript', 'Three.js', 'A-Frame', 'DQN', 'HandTrack.js', 'Web Speech API', 'Node.js', 'Express.js', 'MongoDB'],
       github: 'https://github.com/monishkumardvs/holoquest',
-      demo: 'https://holoquest.vercel.app/',
     },
   ];
 
@@ -209,7 +202,6 @@ function App() {
     'NPTEL - Data Structures using Python, 2023',
   ];
 
-  // Particle Animation
   useEffect(() => {
     const canvas = document.getElementById('particleCanvas') as HTMLCanvasElement;
     const ctx = canvas.getContext('2d')!;
@@ -242,7 +234,7 @@ function App() {
       }
 
       draw() {
-        ctx.fillStyle = 'rgba(0, 255, 255, 0.8)'; // Cyan particles for 3D vibe
+        ctx.fillStyle = 'rgba(0, 255, 255, 0.8)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -276,9 +268,31 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['home', 'experience', 'projects', 'education', 'skills', 'achievements', 'contact'];
+      let current = 'home';
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            current = section;
+            break;
+          }
+        }
+      }
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen hero-gradient-dark text-gray-200 overflow-hidden">
-      {/* Navigation */}
       <nav className="fixed w-full bg-opacity-90 backdrop-blur-md z-50 py-3 shadow-lg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <motion.h1
@@ -299,7 +313,6 @@ function App() {
                   className={`nav-link capitalize text-sm sm:text-base px-4 py-2 rounded-full ${
                     activeSection === item ? 'nav-link-active' : 'text-gray-300'
                   }`}
-                  onClick={() => setActiveSection(item)}
                   href={`#${item}`}
                 >
                   {item}
@@ -310,7 +323,6 @@ function App() {
         </div>
       </nav>
 
-      {/* Hero Section */}
       <motion.section
         id="home"
         ref={heroRef}
@@ -327,7 +339,7 @@ function App() {
             className="animated-gradient-border"
           >
             <img
-              src="https://avatars.githubusercontent.com/monishkumardvs"
+              src="/assets/mine1.jpg"
               alt="Monish Kumar"
               className="w-56 h-56 sm:w-72 sm:h-72 rounded-full object-cover transform hover:rotate-3 transition-transform duration-300 profile-image"
             />
@@ -374,12 +386,12 @@ function App() {
                 <Mail className="w-6 h-6" /> Email
               </motion.button>
               <motion.button
-                onClick={handleCallClick}
+                onClick={handleResumeDownload}
                 whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 255, 255, 0.6)' }}
                 whileTap={{ scale: 0.95 }}
                 className="social-button flex items-center gap-2 text-white"
               >
-                <Phone className="w-6 h-6" /> Call
+                <Award className="w-6 h-6" /> Resume
               </motion.button>
             </div>
           </motion.div>
@@ -387,7 +399,6 @@ function App() {
         <canvas id="particleCanvas" className="absolute inset-0 w-full h-full pointer-events-none" />
       </motion.section>
 
-      {/* Experience Section */}
       <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-900/50">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -422,7 +433,6 @@ function App() {
         </div>
       </section>
 
-      {/* Projects Section */}
       <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/70">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -441,7 +451,8 @@ function App() {
                 whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="project-card p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-teal-400/20 hover:border-teal-400/40 transition-all duration-500"
+                className="project-card p-6 rounded-2xl bg-gray-800/50 backdrop-blur-md border border-teal-400/20 hover:border-teal-400/40 transition-all duration-500 cursor-pointer"
+                onClick={() => project.github && window.open(project.github, '_blank', 'noopener,noreferrer')}
               >
                 <h3 className="text-2xl font-semibold mb-4 text-teal-400">{project.title}</h3>
                 <p className="text-gray-300 mb-5">{project.description}</p>
@@ -450,44 +461,12 @@ function App() {
                     <span key={i} className="tech-tag text-sm">{tech}</span>
                   ))}
                 </div>
-                <div className="flex gap-4">
-                  {project.github && (
-                    <motion.button
-                      onClick={() => window.open(project.github, '_blank', 'noopener,noreferrer')}
-                      whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 255, 255, 0.6)' }}
-                      whileTap={{ scale: 0.95 }}
-                      className="social-button flex items-center gap-2 text-white"
-                    >
-                      <Github className="w-5 h-5" /> Code
-                    </motion.button>
-                  )}
-                  {project.demo && (
-                    <motion.button
-                      onClick={() => window.open(project.demo, '_blank', 'noopener,noreferrer')}
-                      whileHover={{ scale: 1.1, boxShadow: '0 0 20px rgba(0, 255, 255, 0.6)' }}
-                      whileTap={{ scale: 0.95 }}
-                      className="social-button flex items-center gap-2 text-white"
-                    >
-                      <ExternalLink className="w-5 h-5" /> Demo
-                    </motion.button>
-                  )}
-                  <motion.h4
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    className="text-lg font-semibold text-teal-400 cursor-pointer"
-                    onClick={() => window.open(project.demo || '', '_blank', 'noopener,noreferrer')}
-                  >
-                    Links
-                  </motion.h4>
-                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Education Section */}
       <section id="education" className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/70 to-transparent">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -526,7 +505,6 @@ function App() {
         </div>
       </section>
 
-      {/* Skills Section */}
       <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/70">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -571,7 +549,6 @@ function App() {
         </div>
       </section>
 
-      {/* Coding Profiles Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-transparent to-gray-900/50">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -610,7 +587,6 @@ function App() {
         </div>
       </section>
 
-      {/* Achievements Section */}
       <section id="achievements" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/70">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -639,7 +615,6 @@ function App() {
         </div>
       </section>
 
-      {/* Certifications Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-900/70 to-transparent">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -668,7 +643,6 @@ function App() {
         </div>
       </section>
 
-      {/* Contact Section */}
       <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-900/70">
         <div className="max-w-7xl mx-auto">
           <motion.h2
@@ -729,7 +703,6 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-10 text-center bg-gray-900/80 text-gray-400">
         <p>© {new Date().getFullYear()} Monish Kumar. All rights reserved.</p>
       </footer>

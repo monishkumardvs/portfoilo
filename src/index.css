@@ -50,7 +50,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  min-height: 100vh; /* Ensure full page coverage */
+  min-height: 100vh;
 }
 
 .hero-gradient-dark::before {
@@ -79,7 +79,7 @@
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   padding: 8px;
   border-radius: 50%;
-  width: 200px; /* Fixed size for consistency */
+  width: 200px;
   height: 200px;
 }
 
@@ -304,10 +304,9 @@
   pointer-events: none;
 }
 
-/* Enhanced Experience Section Styling */
 #experience .grid {
-  grid-template-columns: 1fr; /* Single column for better readability */
-  gap: 20px; /* Increased gap for spacing */
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 #experience .bg-gray-800\/50 {
@@ -316,12 +315,12 @@
 }
 
 #experience h3 {
-  color: #14b8a6; /* Teal shade for consistency */
+  color: #14b8a6;
   font-size: 1.75rem;
 }
 
 #experience p {
-  color: #a3bffa; /* Softer text color */
+  color: #a3bffa;
 }
 
 #experience ul {
